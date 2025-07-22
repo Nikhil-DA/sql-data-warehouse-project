@@ -5,6 +5,7 @@
 -- 🧾 Description: This script creates staging (bronze-layer) tables 
 --                to hold raw CRM and ERP data.
 -- --------------------------------------------------------
+*/
 
 -- 🔹 Step 1: Create a new database for staging
 CREATE DATABASE DataWarehouse2;
@@ -15,7 +16,7 @@ USE DataWarehouse2;
 -- --------------------------------------------------------
 -- 🧾 CRM TABLES (Customer Relationship Management System)
 -- --------------------------------------------------------
-*/
+
 
 -- 👤 Customer Info (Basic customer profile from CRM)
 CREATE TABLE bronze_crm_cust_info(
