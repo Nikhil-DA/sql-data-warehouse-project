@@ -5,16 +5,14 @@ USE DataWarehouse2;
 -- Inside DataWarehouse2
 
 CREATE TABLE bronze_crm_cust_info(
-cust_id INT,
-cst_key VARCHAR(50),
-cst_firstname VARCHAR(50),	
-cst_lastname VARCHAR(50),
-cst_marital_status VARCHAR(50),
-cst_gndr VARCHAR(50),
-cst_create_date VARCHAR(50)
+    cust_id INT,
+    cst_key VARCHAR(50),
+    cst_firstname VARCHAR(50),    
+    cst_lastname VARCHAR(50),
+    cst_marital_status VARCHAR(50),
+    cst_gndr VARCHAR(50),
+    cst_create_date VARCHAR(50)
 );
-
-
 
 DROP TABLE IF EXISTS bronze_crm_prd_info;
 
@@ -41,19 +39,20 @@ CREATE TABLE bronze_crm_sales_details (
 );
 
 CREATE TABLE bronze_erp_cust_az12 (
-    cid  VARCHAR(50) CHARACTER SET utf8mb4,
+    cid VARCHAR(50) CHARACTER SET utf8mb4,
     bdate DATE,
     gen VARCHAR(10) CHARACTER SET utf8mb4
 );
 
 CREATE TABLE bronze_erp_loc_a101 (
-    cid  VARCHAR(50) CHARACTER SET utf8mb4,
+    cid VARCHAR(50) CHARACTER SET utf8mb4,
     cntry VARCHAR(50) CHARACTER SET utf8mb4
 );
 
 CREATE TABLE bronze_erp_px_cat_g1v2 (
-    id  VARCHAR(50) CHARACTER SET utf8mb4,
+    id VARCHAR(50) CHARACTER SET utf8mb4,
     cat VARCHAR(50) CHARACTER SET utf8mb4,
     subcat VARCHAR(50) CHARACTER SET utf8mb4,
     maintainance VARCHAR(50) CHARACTER SET utf8mb4
 );
+
