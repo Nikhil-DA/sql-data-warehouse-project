@@ -1,3 +1,38 @@
+-- =============================================================================
+-- 📦 Script: bronze_layer_load.sql
+-- =============================================================================
+-- 🔍 Description:
+--     This SQL script loads raw data from CRM and ERP CSV files into the
+--     Bronze Layer of the Data Warehouse (`bronze` schema).
+--     It performs truncation of existing data and loads new data using
+--     `LOAD DATA LOCAL INFILE`. ETL logging is optionally included.
+--
+-- ⚙️ Operations Performed:
+--     - Enables LOCAL INFILE for MySQL
+--     - Truncates Bronze Layer tables before loading
+--     - Loads CSV files from local paths into MySQL tables
+--     - (Optional) Logs load times to `etl_log` if the table exists
+--
+-- 📁 Files Imported:
+--     - cust_info.csv         → bronze_crm_cust_info
+--     - prd_info.csv          → bronze_crm_prd_info
+--     - sales_details.csv     → bronze_crm_sales_details
+--     - CUST_AZ12.csv         → bronze_erp_cust_az12
+--     - LOC_A101.csv          → bronze_erp_loc_a101
+--     - PX_CAT_G1V2.csv       → bronze_erp_px_cat_g1v2
+--
+-- 🚫 Parameters:
+--     None – this is a flat script, not a stored procedure.
+--
+-- 💡 Usage:
+--     Open in MySQL Workbench and execute to load Bronze Layer.
+--
+-- 📌 Tip:
+--     Consider converting this script to a stored procedure for better reusability.
+-- =============================================================================
+
+
+
 USE datawarehouse2;
 
 CREATE TABLE IF NOT EXISTS etl_log (
