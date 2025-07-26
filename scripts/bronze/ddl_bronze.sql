@@ -8,49 +8,50 @@
 */
 
 -- 🔹 Step 1: Create a new database for staging
-CREATE DATABASE DataWarehouse2;
+CREATE DATABASE IF NOT EXISTS DWH 
+  CHARACTER SET utf8mb4 
+  COLLATE utf8mb4_general_ci;
 
 -- 🔹 Step 2: Switch to the new database
-USE DataWarehouse2;
+USE DWH;
 
 -- --------------------------------------------------------
 -- 🧾 CRM TABLES (Customer Relationship Management System)
 -- --------------------------------------------------------
 
-
 -- 👤 Customer Info (Basic customer profile from CRM)
-CREATE TABLE bronze_crm_cust_info(
-    cust_id INT,
+CREATE TABLE IF NOT EXISTS bronze_crm_cust_info (
+    cst_id INT, -- renamed cust_id to cst_id for consistency
     cst_key VARCHAR(50),
     cst_firstname VARCHAR(50),	
     cst_lastname VARCHAR(50),
     cst_marital_status VARCHAR(50),
     cst_gndr VARCHAR(50),
-    cst_create_date VARCHAR(50)
+    cst_create_date DATETIME -- 
 );
 
 -- 📦 Product Info (Product metadata from CRM)
-CREATE TABLE bronze_crm_prd_info (
+CREATE TABLE IF NOT EXISTS bronze_crm_prd_info (
     prd_id INT,
-    prd_key VARCHAR(50) CHARACTER SET utf8mb4,
-    prd_nm VARCHAR(100) CHARACTER SET utf8mb4,
-    prd_cost INT,
-    prd_line VARCHAR(50) CHARACTER SET utf8mb4,
+    prd_key VARCHAR(50),
+    prd_nm VARCHAR(100),
+    prd_cost DECIMAL(10,2), -- 
+    prd_line VARCHAR(50),
     prd_start_dt DATE,
     prd_end_dt DATE
 );
 
 -- 💰 Sales Transactions (Sales orders and details)
-CREATE TABLE bronze_crm_sales_details (
-    sls_ord_num VARCHAR(50) CHARACTER SET utf8mb4,
-    sls_prd_key VARCHAR(50) CHARACTER SET utf8mb4,
+CREATE TABLE IF NOT EXISTS bronze_crm_sales_details (
+    sls_ord_num VARCHAR(50),
+    sls_prd_key VARCHAR(50),
     sls_cust_id INT,
-    sls_order_dt INT,
-    sls_ship_dt INT,
-    sls_due_dt INT,
-    sls_sales INT,
+    sls_order_dt DATE,
+    sls_ship_dt DATE,
+    sls_due_dt DATE,
+    sls_sales DECIMAL(10,2),
     sls_quantity INT,
-    sls_price INT
+    sls_price DECIMAL(10,2)
 );
 
 -- --------------------------------------------------------
@@ -58,24 +59,24 @@ CREATE TABLE bronze_crm_sales_details (
 -- --------------------------------------------------------
 
 -- 👤 ERP Customer Info (Demographics like DOB and gender)
-CREATE TABLE bronze_erp_cust_az12 (
-    cid  VARCHAR(50) CHARACTER SET utf8mb4,
+CREATE TABLE IF NOT EXISTS bronze_erp_cust_az12 (
+    cid  VARCHAR(50),
     bdate DATE,
-    gen VARCHAR(10) CHARACTER SET utf8mb4
+    gen VARCHAR(10)
 );
 
 -- 🌍 ERP Location Info (Customer country-level data)
-CREATE TABLE bronze_erp_loc_a101 (
-    cid  VARCHAR(50) CHARACTER SET utf8mb4,
-    cntry VARCHAR(50) CHARACTER SET utf8mb4
+CREATE TABLE IF NOT EXISTS bronze_erp_loc_a101 (
+    cid  VARCHAR(50),
+    cntry VARCHAR(50)
 );
 
 -- 🧾 Product Category Info (Categorization of products)
-CREATE TABLE bronze_erp_px_cat_g1v2 (
-    id  VARCHAR(50) CHARACTER SET utf8mb4,
-    cat VARCHAR(50) CHARACTER SET utf8mb4,
-    subcat VARCHAR(50) CHARACTER SET utf8mb4,
-    maintainance VARCHAR(50) CHARACTER SET utf8mb4
+CREATE TABLE IF NOT EXISTS bronze_erp_px_cat_g1v2 (
+    id  VARCHAR(50),
+    cat VARCHAR(50),
+    subcat VARCHAR(50),
+    maintainance VARCHAR(50)
 );
 
 -- --------------------------------------------------------
