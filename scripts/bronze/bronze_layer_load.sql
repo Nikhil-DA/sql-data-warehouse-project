@@ -32,9 +32,9 @@
 -- =============================================================================
 
 
+USE DWH;
 
-USE datawarehouse2;
-
+-- ---------------------- ETL LOG TABLE ----------------------
 CREATE TABLE IF NOT EXISTS etl_log (
     table_name VARCHAR(100),
     started_at DATETIME,
@@ -42,9 +42,12 @@ CREATE TABLE IF NOT EXISTS etl_log (
     duration TIME
 );
 
-
 -- Enable local file loading
 SET GLOBAL local_infile = 1;
+
+-- =============================================================================
+-- ================== CRM TABLES LOAD ==========================================
+-- =============================================================================
 
 -- ==================== STEP 1: bronze_crm_cust_info ====================
 SET @start_cust_info = NOW();
@@ -55,7 +58,9 @@ LOAD DATA LOCAL INFILE 'D:/Data Analytics/End to End SQL/SQL Data Warehouse/sql-
 INTO TABLE bronze_crm_cust_info
 FIELDS TERMINATED BY ',' ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
-IGNORE 1 LINES;
+IGNORE 1 LINES
+(cst_id, cst_key, cst_firstname, cst_lastname, cst_marital_status, cst_gndr, @cst_create_date)
+SET cst_create_date = STR_TO_DATE(@cst_create_date, '%Y-%m-%d %H:%i:%s');
 
 SET @end_cust_info = NOW();
 
@@ -89,13 +94,22 @@ LOAD DATA LOCAL INFILE 'D:/Data Analytics/End to End SQL/SQL Data Warehouse/sql-
 INTO TABLE bronze_crm_sales_details
 FIELDS TERMINATED BY ',' ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
-IGNORE 1 LINES;
+IGNORE 1 LINES
+(sls_ord_num, sls_prd_key, sls_cust_id, @sls_order_dt, @sls_ship_dt, @sls_due_dt, sls_sales, sls_quantity, sls_price)
+SET 
+    sls_order_dt = STR_TO_DATE(@sls_order_dt, '%Y%m%d'),
+    sls_ship_dt = STR_TO_DATE(@sls_ship_dt, '%Y%m%d'),
+    sls_due_dt = STR_TO_DATE(@sls_due_dt, '%Y%m%d');
 
 SET @end_sales_details = NOW();
 
 INSERT INTO etl_log VALUES (
   'bronze_crm_sales_details', @start_sales_details, @end_sales_details, TIMEDIFF(@end_sales_details, @start_sales_details)
 );
+
+-- =============================================================================
+-- ================== ERP TABLES LOAD ==========================================
+-- =============================================================================
 
 -- ==================== STEP 4: bronze_erp_cust_az12 ====================
 SET @start_cust_az12 = NOW();
@@ -106,7 +120,9 @@ LOAD DATA LOCAL INFILE 'D:/Data Analytics/End to End SQL/SQL Data Warehouse/sql-
 INTO TABLE bronze_erp_cust_az12
 FIELDS TERMINATED BY ',' ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
-IGNORE 1 LINES;
+IGNORE 1 LINES
+(cid, @bdate, gen)
+SET bdate = STR_TO_DATE(@bdate, '%Y%m%d');
 
 SET @end_cust_az12 = NOW();
 
@@ -148,6 +164,9 @@ INSERT INTO etl_log VALUES (
   'bronze_erp_px_cat_g1v2', @start_px_cat, @end_px_cat, TIMEDIFF(@end_px_cat, @start_px_cat)
 );
 
-
+-- =============================================================================
+-- FINAL: View ETL log
+-- =============================================================================
 
 SELECT * FROM etl_log ORDER BY started_at DESC;
+
