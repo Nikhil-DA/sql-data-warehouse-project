@@ -1,6 +1,6 @@
 /*
 ===============================================================================
-Stored Procedure: Load Silver Layer (Bronze -> Silver)
+Load Silver Layer (Bronze -> Silver)
 ===============================================================================
 Script Purpose:
     This stored procedure performs the ETL (Extract, Transform, Load) process to 
@@ -25,10 +25,7 @@ Notes:
 */
 
 
-DELIMITER $$
 
-CREATE PROCEDURE sp_bronze_to_silver_etl()
-BEGIN
     -- ============================================
     -- CRM: Customer Info
     -- ============================================
@@ -229,7 +226,3 @@ BEGIN
     -- Final Completion Message
     -- ============================================
     SELECT '✅ ETL process completed successfully! All Silver tables have been refreshed.' AS msg;
-
-END$$
-
-DELIMITER ;
