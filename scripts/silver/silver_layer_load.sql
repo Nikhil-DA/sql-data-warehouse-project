@@ -9,15 +9,6 @@ Script Purpose:
         - Applying data cleansing and transformation logic during inserts.
         - Handling data consistency and correcting common data issues.
 
-Parameters:
-    None.
-    This stored procedure does not accept parameters or return values.
-
-Usage Example:
-    CALL sp_bronze_to_silver_etl();
-    -- Or depending on your schema and naming conventions:
-    -- EXEC Silver.sp_bronze_to_silver_etl;
-
 Notes:
     - Ensure you have appropriate privileges to truncate and insert data.
     - Run this procedure after the Bronze tables are fully loaded and ready.
