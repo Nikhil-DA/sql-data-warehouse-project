@@ -21,9 +21,6 @@ This project follows the **Medallion Architecture** with three layers:
 
 * **Gold Layer:**
   Business-ready, analytical models in a **Star Schema** with dimension and fact tables. This layer supports reporting and dashboards.
-
-![Data Architecture]([docs/data_architecture.drawio](https://github.com/Nikhil-DA/sql-data-warehouse-project/blob/main/docs/DW%20-%20data_architecture.png))
-
 ---
 
 ## **📖 Project Overview**
