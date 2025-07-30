@@ -3,8 +3,6 @@
    GOLD LAYER VIEWS
    This script creates the dimension and fact views for the 
    Gold Layer of the Data Warehouse.
-   Author: <Your Name>
-   Date: <YYYY-MM-DD>
 =====================================================================
 */
 
