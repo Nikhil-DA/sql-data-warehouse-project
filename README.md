@@ -84,11 +84,11 @@ data-warehouse-project/
 ├── datasets/                           # Raw datasets (ERP and CRM data)
 │
 ├── docs/                               # Documentation & diagrams
-│   ├── data_architecture.drawio        # Data warehouse architecture diagram
-│   ├── data_models.drawio              # Star schema diagram
-│   ├── data_flow.drawio                # ETL data flow diagram
-│   ├── data_catalog.md                 # Gold layer data catalog (fields & metadata)
-│   ├── naming-conventions.md           # Naming standards for tables/columns
+│   ├──DW - data_architecture.png        # Data warehouse architecture diagram
+│   ├── DW -data_integration.png             
+│   ├── ETL2.png                # ETL data flow diagram
+│   ├── connecting tables.png          )
+│          
 │
 ├── scripts/                            # SQL scripts for each layer
 │   ├── bronze/                         # Raw load scripts
@@ -100,7 +100,10 @@ data-warehouse-project/
 │
 ├── README.md                           # Project documentation (this file)
 ```
-
+DW - data_architecture.png
+DW -data_integration.png
+ETL2.png
+connecting tables.png
 ---
 
 ## **📜 Gold Layer (Star Schema)**
