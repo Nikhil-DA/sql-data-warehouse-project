@@ -5,6 +5,7 @@
 ## **📊 Data Warehouse and Analytics Project**
 
 Welcome to the **Data Warehouse and Analytics Project repository!** 🚀
+
 This project demonstrates how to build a complete data warehouse and analytics solution using **SQL (MySQL Workbench)**, following the **Medallion Architecture (Bronze, Silver, Gold)** and applying **ETL best practices**.
 
 ---
